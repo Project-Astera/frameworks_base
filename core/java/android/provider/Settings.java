@@ -5551,6 +5551,14 @@ public final class Settings {
         @Readable
         public static final String DESKTOP_MODE = "desktop_mode";
 
+	/**
+         * Whether to play notification sound and vibration if screen is ON
+         * 0 - never
+         * 1 - always
+         * @hide
+         */
+        public static final String NOTIFICATION_SOUND_VIB_SCREEN_ON = "notification_sound_vib_screen_on";
+
         /**
          * Whether the button backlight is only lit when pressed (and not when screen is touched)
          * The value is boolean (1 or 0).
