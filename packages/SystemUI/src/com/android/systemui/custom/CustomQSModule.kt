@@ -17,6 +17,7 @@ import com.android.systemui.qs.tiles.AntiFlickerTile
 import com.android.systemui.qs.tiles.DataSwitchTile
 import com.android.systemui.qs.tiles.CompassTile
 import com.android.systemui.qs.tiles.CPUInfoTile
+import com.android.systemui.qs.tiles.FPSInfoTile
 
 import dagger.Binds
 import dagger.Module
@@ -66,6 +67,12 @@ interface CustomQSModule {
     @IntoMap
     @StringKey(CPUInfoTile.TILE_SPEC)
     fun CPUInfoTile(cpuInfoTile: CPUInfoTile): QSTileImpl<*>
+
+    /** Inject FPSInfoTile into tileMap in QSModule */
+    @Binds
+    @IntoMap
+    @StringKey(FPSInfoTile.TILE_SPEC)
+    fun FPSInfoTile(fpsInfoTile: FPSInfoTile): QSTileImpl<*>
 
     /** Inject SyncTile into tileMap in QSModule */
     @Binds
