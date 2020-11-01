@@ -188,6 +188,7 @@ public final class BatteryService extends SystemService {
     // Battery light customization
     private boolean mLowBatteryLightEnabled;
     private boolean mHasIntrusiveBatteryLed;
+    private boolean mFullBatteryLight = true;
 
     private boolean mSentLowBatteryBroadcast = false;
 
@@ -319,6 +320,9 @@ public final class BatteryService extends SystemService {
             resolver.registerContentObserver(Settings.Global.getUriFor(
                     Settings.Global.LOW_BATTERY_LIGHT_ENABLED),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.BATTERY_FULL_LIGHT_ENABLED),
+                    false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -329,6 +333,8 @@ public final class BatteryService extends SystemService {
 
         public void update() {
             ContentResolver resolver = mContext.getContentResolver();
+            mFullBatteryLight = Settings.System.getInt(resolver,
+                    Settings.System.BATTERY_FULL_LIGHT_ENABLED, 1) != 0;
             mLowBatteryLightEnabled = Settings.Global.getInt(resolver,
                     Settings.Global.LOW_BATTERY_LIGHT_ENABLED, mHasIntrusiveBatteryLed ? 0 : 1) == 1;
             updateLed();
@@ -1356,7 +1362,9 @@ public final class BatteryService extends SystemService {
             }
             final int level = mHealthInfo.batteryLevel;
             final int status = mHealthInfo.batteryStatus;
-            if (level < mLowBatteryWarningLevel) {
+            if (!mFullBatteryLight && level == 100) {
+                mBatteryLight.turnOff();
+            } else if (level < mLowBatteryWarningLevel) {
                 if (status == BatteryManager.BATTERY_STATUS_CHARGING) {
                     // Solid red when battery is charging
                     mBatteryLight.setColor(mBatteryLowARGB);
