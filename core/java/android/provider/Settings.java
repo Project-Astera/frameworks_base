@@ -6144,6 +6144,14 @@ public final class Settings {
         public static final String LOCKSCREEN_BATTERY_INFO = "lockscreen_battery_info";
 
         /**
+         * Whether the full battery light should be enabled
+         * The value is boolean (1 or 0).
+         * @hide
+         */
+        @Readable
+        public static final String BATTERY_FULL_LIGHT_ENABLED = "battery_full_light_enabled";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
