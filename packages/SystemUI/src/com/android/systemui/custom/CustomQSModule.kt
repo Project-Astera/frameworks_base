@@ -18,6 +18,7 @@ import com.android.systemui.qs.tiles.DataSwitchTile
 import com.android.systemui.qs.tiles.SoundSearchTile
 import com.android.systemui.qs.tiles.AODTile
 import com.android.systemui.qs.tiles.CompassTile
+import com.android.systemui.qs.tiles.RefreshRateTile
 
 import dagger.Binds
 import dagger.Module
@@ -73,6 +74,12 @@ interface CustomQSModule {
     @IntoMap
     @StringKey(SyncTile.TILE_SPEC)
     fun bindSyncTile(syncTile: SyncTile): QSTileImpl<*>
+
+    /** Inject RefreshRateTile into tileMap in QSModule */
+    @Binds
+    @IntoMap
+    @StringKey(RefreshRateTile.TILE_SPEC)
+    fun bindRefreshRateTile(refreshRateTile: RefreshRateTile): QSTileImpl<*>
 
     /** Inject AmbientDisplayTile into tileMap in QSModule */
     @Binds
