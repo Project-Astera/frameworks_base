@@ -168,6 +168,7 @@ import com.android.systemui.keyguard.WakefulnessLifecycle;
 import com.android.systemui.keyguard.domain.interactor.AlternateBouncerInteractor;
 import com.android.systemui.keyguard.ui.binder.LightRevealScrimViewBinder;
 import com.android.systemui.keyguard.ui.viewmodel.LightRevealScrimViewModel;
+import com.android.systemui.model.SysUiState;
 import com.android.systemui.navigationbar.NavigationBarController;
 import com.android.systemui.navigationbar.NavigationBarView;
 import com.android.systemui.plugins.DarkIconDispatcher;
@@ -689,6 +690,7 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, Tune
 
     private boolean mDisplayCutoutHidden;
     private Handler mRefreshNavbarHandler;
+    private final SysUiState mSysUiState;
 
     private final BurnInProtectionController mBurnInProtectionController;
 
@@ -794,7 +796,8 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, Tune
             Provider<FingerprintManager> fingerprintManager,
             TunerService tunerService,
             @Main Handler refreshNavbarHandler,
-            BurnInProtectionController burnInProtectionController) {
+            BurnInProtectionController burnInProtectionController,
+            SysUiState sysUiState) {
         mContext = context;
         mNotificationsController = notificationsController;
         mFragmentService = fragmentService;
@@ -875,6 +878,7 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, Tune
         mAlternateBouncerInteractor = alternateBouncerInteractor;
         mUserTracker = userTracker;
         mFingerprintManager = fingerprintManager;
+        mSysUiState = sysUiState;
 
         mLockscreenShadeTransitionController = lockscreenShadeTransitionController;
         mStartingSurfaceOptional = startingSurfaceOptional;
@@ -4061,6 +4065,17 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, Tune
 
     protected void dismissKeyboardShortcuts() {
         KeyboardShortcuts.dismiss();
+    }
+
+    @Override
+    public void setBlockedGesturalNavigation(boolean blocked) {
+        if (getNotificationPanelViewController() != null) {
+            getNotificationPanelViewController().setBlockedGesturalNavigation(blocked);
+            getNotificationPanelViewController().updateSystemUiStateFlags();
+        }
+        if (getNavigationBarView() != null) {
+            getNavigationBarView().setBlockedGesturalNavigation(blocked, mSysUiState);
+        }
     }
 
     /**
