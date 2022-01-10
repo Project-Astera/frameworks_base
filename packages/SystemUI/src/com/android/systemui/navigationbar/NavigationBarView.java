@@ -106,6 +106,9 @@ public class NavigationBarView extends FrameLayout implements TunerService.Tunab
     private static final String NAVIGATION_BAR_MENU_ARROW_KEYS =
             "customsystem:" + Settings.System.NAVIGATION_BAR_MENU_ARROW_KEYS;
 
+    private static final String ENABLE_FLOATING_ROTATION_BUTTON =
+            "system:" + Settings.System.ENABLE_FLOATING_ROTATION_BUTTON;
+
     final static boolean ALTERNATE_CAR_MODE_UI = false;
 
     private Executor mBgExecutor;
@@ -152,6 +155,7 @@ public class NavigationBarView extends FrameLayout implements TunerService.Tunab
     private boolean mInCarMode = false;
     private boolean mDockedStackExists;
     private boolean mScreenOn = true;
+    private boolean mIsUserEnabled = true;
 
     private final SparseArray<ButtonDispatcher> mButtonDispatchers = new SparseArray<>();
     private final ContextualButtonGroup mContextualButtonGroup;
@@ -618,7 +622,7 @@ public class NavigationBarView extends FrameLayout implements TunerService.Tunab
             mTransitionListener.onBackAltCleared();
         }
         mImeVisible = visible;
-        mRotationButtonController.getRotationButton().setCanShowRotationButton(!visible);
+        mRotationButtonController.getRotationButton().setCanShowRotationButton(!visible && mIsUserEnabled);
     }
 
     void setDisabledFlags(int disabledFlags, SysUiState sysUiState) {
@@ -1177,6 +1181,7 @@ public class NavigationBarView extends FrameLayout implements TunerService.Tunab
         reorient();
         final TunerService tunerService = Dependency.get(TunerService.class);
         tunerService.addTunable(this, NAVIGATION_BAR_MENU_ARROW_KEYS);
+        tunerService.addTunable(this, ENABLE_FLOATING_ROTATION_BUTTON);
         if (mRotationButtonController != null) {
             mRotationButtonController.registerListeners(false /* registerRotationWatcher */);
         }
@@ -1198,9 +1203,17 @@ public class NavigationBarView extends FrameLayout implements TunerService.Tunab
 
     @Override
     public void onTuningChanged(String key, String newValue) {
-        if (NAVIGATION_BAR_MENU_ARROW_KEYS.equals(key)) {
-            mShowCursorKeys = TunerService.parseIntegerSwitch(newValue, false);
-            setNavigationIconHints(mNavigationIconHints);
+        switch (key) {
+            case NAVIGATION_BAR_MENU_ARROW_KEYS:
+                mShowCursorKeys = TunerService.parseIntegerSwitch(newValue, false);
+                setNavigationIconHints(mNavigationIconHints);
+                break;
+            case ENABLE_FLOATING_ROTATION_BUTTON:
+                mIsUserEnabled = TunerService.parseIntegerSwitch(newValue, true);
+                if (mRotationButtonController == null) return;
+                mRotationButtonController.getRotationButton().setCanShowRotationButton(
+                        !mImeVisible && mIsUserEnabled);
+                break;
         }
     }
 
