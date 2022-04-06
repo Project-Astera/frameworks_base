@@ -465,6 +465,7 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, Tune
     @VisibleForTesting
     DozeServiceHost mDozeServiceHost;
     private LightRevealScrim mLightRevealScrim;
+    private WiredChargingRippleController mChargingRippleAnimationController;
     private PowerButtonReveal mPowerButtonReveal;
 
     private boolean mWakeUpComingFromTouch;
@@ -864,6 +865,7 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, Tune
         mDemoModeController = demoModeController;
         mNotificationIconAreaController = notificationIconAreaController;
         mBrightnessSliderFactory = brightnessSliderFactory;
+        mChargingRippleAnimationController = wiredChargingRippleController;
         mWallpaperController = wallpaperController;
         mOngoingCallController = ongoingCallController;
         mStatusBarSignalPolicy = statusBarSignalPolicy;
