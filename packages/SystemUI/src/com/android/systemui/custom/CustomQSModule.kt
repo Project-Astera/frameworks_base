@@ -23,7 +23,7 @@ import com.android.systemui.qs.tiles.CompassTile
 import com.android.systemui.qs.tiles.RefreshRateTile
 import com.android.systemui.qs.tiles.CPUInfoTile
 import com.android.systemui.qs.tiles.FPSInfoTile
-
+import com.android.systemui.qs.tiles.LocaleTile
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -162,4 +162,10 @@ interface CustomQSModule {
     @IntoMap
     @StringKey(AODTile.TILE_SPEC)
     fun bindAODTile(aodTile: AODTile): QSTileImpl<*>
+
+    /** Inject LocaleTile into tileMap in QSModule */
+    @Binds
+    @IntoMap
+    @StringKey(LocaleTile.TILE_SPEC)
+    fun bindLocaleTile(localeTile: LocaleTile): QSTileImpl<*>
 }

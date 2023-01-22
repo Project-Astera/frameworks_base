@@ -12,6 +12,9 @@
     <uses-permission android:name="lineageos.permission.MANAGE_LIVEDISPLAY" />
     <uses-permission android:name="lineageos.permission.HARDWARE_ABSTRACTION_ACCESS" />
 
+    <!-- Locale QS -->
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+
     <!-- SystemUI Tuner -->
     <application>
         <activity-alias
