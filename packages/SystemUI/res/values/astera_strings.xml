@@ -59,4 +59,7 @@
 
     <!-- FPS Info tile -->
     <string name="quick_settings_fpsinfo_label">FPS Info</string>
+
+    <!-- Button to restart SystemUI, within the Restart Options dialog -->
+    <string name="global_action_restart_systemui">SystemUI</string>
 </resources>
