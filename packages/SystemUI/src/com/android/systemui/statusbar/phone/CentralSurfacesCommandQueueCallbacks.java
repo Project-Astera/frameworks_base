@@ -172,7 +172,6 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
         mUserTracker = userTracker;
         mQSHost = qsHost;
         mSecureLockscreenQSDisabler = secureLockscreenQSDisabler;
-
         mVibrateOnOpening = resources.getBoolean(R.bool.config_vibrateOnIconAnimation);
         mCameraLaunchGestureVibrationEffect = getCameraGestureVibrationEffect(
                 mVibratorOptional, resources);
