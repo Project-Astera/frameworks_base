@@ -11680,6 +11680,12 @@ public final class Settings {
         public static final String SHOW_CPU_OVERLAY = "show_cpu_overlay";
 
         /**
+         * Boolean value whether to link ringtone and notification volume
+         * @hide
+         */
+        public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
+
+        /**
          * Control whether the process FPS info meter should be shown.
          * @hide
          */
