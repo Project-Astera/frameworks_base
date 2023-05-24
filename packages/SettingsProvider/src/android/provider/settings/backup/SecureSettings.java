@@ -227,5 +227,6 @@ public class SecureSettings {
         Settings.Secure.SHOW_WIFI_STANDARD_ICON,
         Settings.Secure.DOZE_DOUBLE_TAP_GESTURE_AMBIENT,
         Settings.Secure.DOZE_PICK_UP_GESTURE_AMBIENT,
+        Settings.Secure.DOZE_SINGLE_TAP_GESTURE_AMBIENT,
     };
 }
