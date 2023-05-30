@@ -12043,11 +12043,18 @@ public final class Settings {
          */
         public static final String DOZE_PICK_UP_GESTURE_AMBIENT = "doze_pick_up_gesture_ambient";
 
-       /**
+        /**
          * Whether to show ambient instead of waking for the tap gesture
          * @hide
          */
         public static final String DOZE_SINGLE_TAP_GESTURE_AMBIENT = "doze_single_tap_gesture_ambient";
+
+        /**
+         * Control whether to spoof current status of storage encryption.
+         * @hide
+         */
+        @Readable
+        public static final String SPOOF_STORAGE_ENCRYPTION_STATUS = "spoof_storage_encryption_status";
 
         /**
          * These entries are considered common between the personal and the managed profile,
