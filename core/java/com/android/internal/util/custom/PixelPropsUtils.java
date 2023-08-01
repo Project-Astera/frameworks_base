@@ -43,7 +43,7 @@ import java.util.Map;
 public class PixelPropsUtils {
 
     private static final String TAG = PixelPropsUtils.class.getSimpleName();
-    private static final String DEVICE = "org.voidui.device";
+    private static final String DEVICE = "ro.astera.device";
     private static final boolean DEBUG = false;
 
     private static final String PACKAGE_GMS = "com.google.android.gms";
