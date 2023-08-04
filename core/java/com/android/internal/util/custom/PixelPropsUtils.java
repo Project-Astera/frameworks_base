@@ -331,49 +331,50 @@ public class PixelPropsUtils {
                 } else {
                     propsToChange.putAll(propsToChangePixel5);
                 }
-            } else {
-                if (!SystemProperties.getBoolean("persist.sys.pixelprops.games", false))
-                    return;
+            }
 
-                if (Arrays.asList(packagesToChangeK30U).contains(packageName)) {
-                    propsToChange.putAll(propsToChangeK30U);
-                } else if (Arrays.asList(packagesToChangeMi13pCN).contains(packageName)) {
-                    propsToChange.putAll(propsToChangeMi13pCN);
-                } else if (Arrays.asList(packagesToChangeROG6).contains(packageName)) {
-                    propsToChange.putAll(propsToChangeROG6);
-                } else if (Arrays.asList(packagesToChangeXP5).contains(packageName)) {
-                    propsToChange.putAll(propsToChangeXP5);
-                } else if (Arrays.asList(packagesToChangeOP8P).contains(packageName)) {
-                    propsToChange.putAll(propsToChangeOP8P);
-                } else if (Arrays.asList(packagesToChangeMI11T).contains(packageName)) {
-                    propsToChange.putAll(propsToChangeMI11T);
-                } else if (Arrays.asList(packagesToChangeOP9R).contains(packageName)) {
-                    propsToChange.putAll(propsToChangeOP9R);
-                } else if (Arrays.asList(packagesToChangeF4).contains(packageName)) {
-                    propsToChange.putAll(propsToChangeF4);
+            if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
+            for (Map.Entry<String, Object> prop : propsToChange.entrySet()) {
+                String key = prop.getKey();
+                Object value = prop.getValue();
+                if (propsToKeep.containsKey(packageName) && propsToKeep.get(packageName).contains(key)) {
+                    if (DEBUG) Log.d(TAG, "Not defining " + key + " prop for: " + packageName);
+                    continue;
                 }
+                if (DEBUG) Log.d(TAG, "Defining " + key + " prop for: " + packageName);
+                setPropValue(key, value);
             }
+            // Set proper indexing fingerprint
+            if (packageName.equals("com.google.android.settings.intelligence")) {
+                setPropValue("FINGERPRINT", Build.VERSION.INCREMENTAL);
+                return;
+            }
+            if (!sNetflixModel.isEmpty() && packageName.equals("com.netflix.mediaclient")) {
+                if (DEBUG) Log.d(TAG, "Setting model to " + sNetflixModel + " for Netflix");
+                setPropValue("MODEL", sNetflixModel);
+                return;
+            }
+        } else {
+            if (!SystemProperties.getBoolean("persist.sys.pixelprops.games", false))
+                return;
 
-        if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
-        for (Map.Entry<String, Object> prop : propsToChange.entrySet()) {
-            String key = prop.getKey();
-            Object value = prop.getValue();
-            if (propsToKeep.containsKey(packageName) && propsToKeep.get(packageName).contains(key)) {
-                if (DEBUG) Log.d(TAG, "Not defining " + key + " prop for: " + packageName);
-                continue;
+            if (Arrays.asList(packagesToChangeK30U).contains(packageName)) {
+                propsToChange.putAll(propsToChangeK30U);
+            } else if (Arrays.asList(packagesToChangeMi13pCN).contains(packageName)) {
+                propsToChange.putAll(propsToChangeMi13pCN);
+            } else if (Arrays.asList(packagesToChangeROG6).contains(packageName)) {
+                propsToChange.putAll(propsToChangeROG6);
+            } else if (Arrays.asList(packagesToChangeXP5).contains(packageName)) {
+                propsToChange.putAll(propsToChangeXP5);
+            } else if (Arrays.asList(packagesToChangeOP8P).contains(packageName)) {
+                propsToChange.putAll(propsToChangeOP8P);
+            } else if (Arrays.asList(packagesToChangeMI11T).contains(packageName)) {
+                propsToChange.putAll(propsToChangeMI11T);
+            } else if (Arrays.asList(packagesToChangeOP9R).contains(packageName)) {
+                propsToChange.putAll(propsToChangeOP9R);
+            } else if (Arrays.asList(packagesToChangeF4).contains(packageName)) {
+                propsToChange.putAll(propsToChangeF4);
             }
-            if (DEBUG) Log.d(TAG, "Defining " + key + " prop for: " + packageName);
-            setPropValue(key, value);
-        }
-        // Set proper indexing fingerprint
-        if (packageName.equals("com.google.android.settings.intelligence")) {
-            setPropValue("FINGERPRINT", Build.VERSION.INCREMENTAL);
-            return;
-        }
-        if (!sNetflixModel.isEmpty() && packageName.equals("com.netflix.mediaclient")) {
-            if (DEBUG) Log.d(TAG, "Setting model to " + sNetflixModel + " for Netflix");
-            setPropValue("MODEL", sNetflixModel);
-            return;
         }
     }
 
