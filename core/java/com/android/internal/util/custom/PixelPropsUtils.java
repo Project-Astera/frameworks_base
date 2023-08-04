@@ -317,7 +317,12 @@ public class PixelPropsUtils {
             boolean isPixelDevice = Arrays.asList(pixelCodenames).contains(SystemProperties.get(DEVICE));
 
             if (packageName.equals("com.google.android.apps.photos")) {
-                propsToChange.putAll(propsToChangePixelXL);
+                if (SystemProperties.getBoolean("persist.sys.pixelprops.gphotos", true)) {
+                    propsToChange.putAll(propsToChangePixelXL);
+                } else {
+                    if (isPixelDevice) return;
+                    propsToChange.putAll(propsToChangePixel5);
+                }
             } else if (isPixelDevice) {
                 return;
             } else {
@@ -326,24 +331,28 @@ public class PixelPropsUtils {
                 } else {
                     propsToChange.putAll(propsToChangePixel5);
                 }
+            } else {
+                if (!SystemProperties.getBoolean("persist.sys.pixelprops.games", false))
+                    return;
+
+                if (Arrays.asList(packagesToChangeK30U).contains(packageName)) {
+                    propsToChange.putAll(propsToChangeK30U);
+                } else if (Arrays.asList(packagesToChangeMi13pCN).contains(packageName)) {
+                    propsToChange.putAll(propsToChangeMi13pCN);
+                } else if (Arrays.asList(packagesToChangeROG6).contains(packageName)) {
+                    propsToChange.putAll(propsToChangeROG6);
+                } else if (Arrays.asList(packagesToChangeXP5).contains(packageName)) {
+                    propsToChange.putAll(propsToChangeXP5);
+                } else if (Arrays.asList(packagesToChangeOP8P).contains(packageName)) {
+                    propsToChange.putAll(propsToChangeOP8P);
+                } else if (Arrays.asList(packagesToChangeMI11T).contains(packageName)) {
+                    propsToChange.putAll(propsToChangeMI11T);
+                } else if (Arrays.asList(packagesToChangeOP9R).contains(packageName)) {
+                    propsToChange.putAll(propsToChangeOP9R);
+                } else if (Arrays.asList(packagesToChangeF4).contains(packageName)) {
+                    propsToChange.putAll(propsToChangeF4);
+                }
             }
-        } else if (Arrays.asList(packagesToChangeK30U).contains(packageName)) {
-            propsToChange.putAll(propsToChangeK30U);
-        } else if (Arrays.asList(packagesToChangeMi13pCN).contains(packageName)) {
-            propsToChange.putAll(propsToChangeMi13pCN);
-        } else if (Arrays.asList(packagesToChangeROG6).contains(packageName)) {
-            propsToChange.putAll(propsToChangeROG6);
-        } else if (Arrays.asList(packagesToChangeXP5).contains(packageName)) {
-            propsToChange.putAll(propsToChangeXP5);
-        } else if (Arrays.asList(packagesToChangeOP8P).contains(packageName)) {
-            propsToChange.putAll(propsToChangeOP8P);
-        } else if (Arrays.asList(packagesToChangeMI11T).contains(packageName)) {
-            propsToChange.putAll(propsToChangeMI11T);
-        } else if (Arrays.asList(packagesToChangeOP9R).contains(packageName)) {
-            propsToChange.putAll(propsToChangeOP9R);
-        } else if (Arrays.asList(packagesToChangeF4).contains(packageName)) {
-            propsToChange.putAll(propsToChangeF4);
-        }
 
         if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
         for (Map.Entry<String, Object> prop : propsToChange.entrySet()) {
