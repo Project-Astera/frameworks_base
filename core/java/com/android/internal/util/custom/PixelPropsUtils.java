@@ -359,21 +359,61 @@ public class PixelPropsUtils {
                 return;
 
             if (Arrays.asList(packagesToChangeK30U).contains(packageName)) {
-                propsToChange.putAll(propsToChangeK30U);
+                if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
+                for (Map.Entry<String, Object> prop : propsToChangeK30U.entrySet()) {
+                    String key = prop.getKey();
+                    Object value = prop.getValue();
+                    setPropValue(key, value);
+                }
             } else if (Arrays.asList(packagesToChangeMi13pCN).contains(packageName)) {
-                propsToChange.putAll(propsToChangeMi13pCN);
+                if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
+                for (Map.Entry<String, Object> prop : propsToChangeMi13pCN.entrySet()) {
+                    String key = prop.getKey();
+                    Object value = prop.getValue();
+                    setPropValue(key, value);
+                }
             } else if (Arrays.asList(packagesToChangeROG6).contains(packageName)) {
-                propsToChange.putAll(propsToChangeROG6);
+                if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
+                for (Map.Entry<String, Object> prop : propsToChangeROG6.entrySet()) {
+                    String key = prop.getKey();
+                    Object value = prop.getValue();
+                    setPropValue(key, value);
+                }
             } else if (Arrays.asList(packagesToChangeXP5).contains(packageName)) {
-                propsToChange.putAll(propsToChangeXP5);
+                if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
+                for (Map.Entry<String, Object> prop : propsToChangeXP5.entrySet()) {
+                    String key = prop.getKey();
+                    Object value = prop.getValue();
+                    setPropValue(key, value);
+                }
             } else if (Arrays.asList(packagesToChangeOP8P).contains(packageName)) {
-                propsToChange.putAll(propsToChangeOP8P);
+                if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
+                for (Map.Entry<String, Object> prop : propsToChangeOP8P.entrySet()) {
+                    String key = prop.getKey();
+                    Object value = prop.getValue();
+                    setPropValue(key, value);
+                }
             } else if (Arrays.asList(packagesToChangeMI11T).contains(packageName)) {
-                propsToChange.putAll(propsToChangeMI11T);
+                if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
+                for (Map.Entry<String, Object> prop : propsToChangeMI11T.entrySet()) {
+                    String key = prop.getKey();
+                    Object value = prop.getValue();
+                    setPropValue(key, value);
+                }
             } else if (Arrays.asList(packagesToChangeOP9R).contains(packageName)) {
-                propsToChange.putAll(propsToChangeOP9R);
+                if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
+                for (Map.Entry<String, Object> prop : propsToChangeOP9R.entrySet()) {
+                    String key = prop.getKey();
+                    Object value = prop.getValue();
+                    setPropValue(key, value);
+                }
             } else if (Arrays.asList(packagesToChangeF4).contains(packageName)) {
-                propsToChange.putAll(propsToChangeF4);
+                if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
+                for (Map.Entry<String, Object> prop : propsToChangeF4.entrySet()) {
+                    String key = prop.getKey();
+                    Object value = prop.getValue();
+                    setPropValue(key, value);
+                }
             }
         }
     }
