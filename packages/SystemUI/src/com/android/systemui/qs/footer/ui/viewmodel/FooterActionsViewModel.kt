@@ -250,7 +250,7 @@ class FooterActionsViewModel(
         val mKeyguard = Dependency.get(KeyguardStateController::class.java)
         if (mKeyguard.isShowing() && mKeyguard.isMethodSecure() 
                 && Settings.System.getIntForUser(context.getContentResolver(),
-                Settings.System.LOCK_POWER_MENU_DISABLED, 1, UserHandle.USER_CURRENT) == 0) {
+                Settings.System.LOCKSCREEN_ENABLE_POWER_MENU, 1, UserHandle.USER_CURRENT) == 0) {
             return
         }
         if (falsingManager.isFalseTap(FalsingManager.LOW_PENALTY)) {
