@@ -23,7 +23,7 @@ import android.provider.Settings;
 public final class PowerMenuUtils {
     public static boolean isAdvancedRestartPossible(final Context context) {
         boolean advancedRestartEnabled = Settings.Secure.getInt(context.getContentResolver(),
-                Settings.Secure.ADVANCED_REBOOT, 0) == 1;
+                Settings.Secure.ADVANCED_REBOOT, 1) == 1;
         boolean isPrimaryUser = UserHandle.getCallingUserId() == UserHandle.USER_SYSTEM;
 
         return advancedRestartEnabled && isPrimaryUser;
