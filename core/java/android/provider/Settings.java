@@ -6160,13 +6160,6 @@ public final class Settings {
         public static final String LOCKSCREEN_BATTERY_INFO = "lockscreen_battery_info";
 
         /**
-         * Disable power menu on secure lock screens
-         *
-         * @hide
-         */
-        public static final String LOCK_POWER_MENU_DISABLED = "lockscreen_power_menu_disabled";
-
-        /**
          * Haptic feedback on brightness slider
          * @hide
          */
@@ -6184,6 +6177,12 @@ public final class Settings {
          * @hide
          */
         public static final String QS_TRANSPARENCY = "qs_transparency";
+
+        /**
+         * Whether to show power menu on LockScreen
+         * @hide
+         */
+        public static final String LOCKSCREEN_ENABLE_POWER_MENU = "lockscreen_enable_power_menu";
 
         /**
          * Keys we no longer back up under the current schema, but want to continue to

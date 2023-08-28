@@ -689,7 +689,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     // Maps global key codes to the components that will handle them.
     private GlobalKeyManager mGlobalKeyManager;
 
-    private boolean mGlobalActionsOnLockDisable;
+    private boolean mGlobalActionsOnLockEnable = true;
 
     // Fallback actions by key code.
     private final SparseArray<KeyCharacterMap.FallbackAction> mFallbackActions =
@@ -988,7 +988,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     Settings.System.SWIPE_TO_SCREENSHOT), false, this,
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.LOCK_POWER_MENU_DISABLED), false, this,
+                    Settings.System.LOCKSCREEN_ENABLE_POWER_MENU), true, this,
                     UserHandle.USER_ALL);
             updateSettings();
         }
@@ -1881,9 +1881,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     }
 
     void showGlobalActionsInternal() {
-        final boolean keyguardShowing = isKeyguardLocked();
+        final boolean keyguardShowing = isKeyguardShowingAndNotOccluded();
         if (keyguardShowing && isKeyguardSecure(mCurrentUserId) &&
-                mGlobalActionsOnLockDisable) {
+                !mGlobalActionsOnLockEnable) {
             return;
         }
         if (mGlobalActions == null) {
@@ -3099,8 +3099,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     Settings.Global.KEY_CHORD_POWER_VOLUME_UP,
                     mContext.getResources().getInteger(
                             com.android.internal.R.integer.config_keyChordPowerVolumeUp));
-            mGlobalActionsOnLockDisable = Settings.System.getIntForUser(resolver,
-                    Settings.System.LOCK_POWER_MENU_DISABLED, 1,
+            mGlobalActionsOnLockEnable = Settings.System.getIntForUser(resolver,
+                    Settings.System.LOCKSCREEN_ENABLE_POWER_MENU, 1,
                     UserHandle.USER_CURRENT) != 0;
         }
         if (updateRotation) {
