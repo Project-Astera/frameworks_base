@@ -871,15 +871,6 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
         return mSecureSettings.getInt(Settings.Secure.SYSTEM_BLACK_THEME, 0) == 1;
     }
 
-    private final ConfigurationListener mConfigurationListener = new ConfigurationListener() {
-        @Override
-        public void onUiModeChanged() {
-            if (isBlackThemeEnabled()) {
-                reevaluateSystemTheme(true /* forceReload */);
-            }
-        }
-    };
-
     @Override
     public void dump(@NonNull PrintWriter pw, @NonNull String[] args) {
         pw.println("mSystemColors=" + mCurrentColors);
