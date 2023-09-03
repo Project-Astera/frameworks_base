@@ -797,7 +797,6 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, Tune
             Lazy<LightRevealScrimViewModel> lightRevealScrimViewModelLazy,
             AlternateBouncerInteractor alternateBouncerInteractor,
             UserTracker userTracker,
-            TunerService tunerService,
             Provider<FingerprintManager> fingerprintManager,
             TunerService tunerService,
             @Main Handler refreshNavbarHandler,
