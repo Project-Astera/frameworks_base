@@ -100,19 +100,17 @@ interface CustomQSModule {
     @StringKey(UsbTetherTile.TILE_SPEC)
     fun bindUsbTetherTile(usbTetherTile: UsbTetherTile): QSTileImpl<*>
 
-<<<<<<< HEAD
     /** Inject AODTile into tileMap in QSModule */
     @Binds
     @IntoMap
     @StringKey(AODTile.TILE_SPEC)
     fun bindAODTile(aodTile: AODTile): QSTileImpl<*>
-=======
+
     /** Inject VolumeTile into tileMap in QSModule */
     @Binds
     @IntoMap
     @StringKey(VolumeTile.TILE_SPEC)
     fun bindVolumeTile(volumeTile: VolumeTile): QSTileImpl<*>
->>>>>>> 40a3a3da8164 (SystemUI: Add tile to show volume panel)
 
     /** Inject VpnTile into tileMap in QSModule */
     @Binds
