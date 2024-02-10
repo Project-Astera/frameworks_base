@@ -60,10 +60,8 @@ public class PixelPropsUtils {
             "com.google.android.apps.googleassistant",
             "com.google.android.apps.nbu.files",
             "com.google.android.apps.podcasts",
-            "com.google.android.apps.privacy.wildlife",
             "com.google.android.apps.tachyon",
             "com.google.android.apps.wallpaper",
-            "com.google.android.apps.subscriptions.red",
             "com.google.pixel.livewallpaper",
             "com.google.android.wallpaper.effects",
             "com.google.android.apps.emojiwallpaper"
